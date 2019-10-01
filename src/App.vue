@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" v-on:mousemove="updateCoordinates">
+    <MyButton v-bind:coords="coords" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MyButton from "./components/MyButton.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    MyButton
+  },
+  data() {
+    return {
+      coords: {
+        x: 0,
+        y: 0
+      }
+    };
+  },
+  methods: {
+    updateCoordinates: function(event) {
+      this.coords.x = event.clientX;
+      this.coords.y = event.clientY;
+    }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 100vh;
 }
 </style>
